@@ -1,0 +1,90 @@
+// Rate Limiter --> 
+
+Features Required:
+
+Configurable Limits: Ability to set request limits per unit of time.
+Support for Different Time Windows: Support for different types of time windows 
+(e.g., sliding window, fixed window).
+Thread Safety: Ensure that the rate limiter can handle concurrent access correctly.
+Ease of Configuration: Easily configurable limits and time windows.
+Extensibility: Allow extension for different rate-limiting strategies.
+Metrics and Logging: Provide metrics and logging for monitoring purposes.
+
+Design patterns-->stategy --> change in the algo
+singleton-- single instance 
+factory--> creation of diff rate limiters 
+
+
+Algo    --> fixed window algo 
+        --> sliding window algo 
+
+// ip prefered (before auth)
+//concreate function with an implementation 
+Rate Limiter 
+public interface RateLimiter{
+
+    boolean allowRequest(String Ip);
+}
+public class Configurations{
+    static int maxRequest = 10;
+    static int windowSize = 5;
+}
+// fixed window rate limiter 
+
+class fixedwindowratelimiter implements ratelimiter{
+Map<String,Integer> requestCounts;
+Map<String,Integer> windowStarttime;
+@override 
+public boolean allowRequest(String Ip){
+long currTime=System.currTime();
+windowStarttime.putifpresent(Ip,currTime);
+requestCounts.putifpresent(Ip,0);
+
+long windowStarttime=windowStarttime.get(Ip);
+if(currTime-windowStarttime >= windowSize )
+{
+    windowStarttime.put(Ip,currTime);
+    requestCounts.put(Ip,0);
+}
+int requestCounts=requestCounts.get(Ip);
+if(requestCounts<maxRequest){
+    requestCounts.put(ip,requestCounts+1);
+    return true;
+}
+return false;
+}
+}
+// Rate Limiter Factory ->
+public class RateLimiterfactory{
+
+    public static RateLimiter createRateLimiter(String type, int maxRequests){
+        switch(type){
+            case "FIXED" :
+             return new fixedwindowratelimiter(maxRequests,windowSize);
+            case "Sliding" :
+             return new fixedwindowratelimiter(maxRequests,windowSize);
+        }
+    }
+}
+
+singleton RateLimiterManager class
+
+public class RateLimiterManager{
+    private static RateLimiterFactory instance;
+    private RateLimiter ratelimiter;
+
+    private RateLimiterManager(){
+        this.ratelimiter=RateLimiterfactory.createRateLimiter("fixed",Configurations.maxRequest,Configurations.)windowSize;
+    }
+
+    public boolean isRequestAllowed(String Ip){
+        return this.ratelimiter.allowRequest(Ip);
+    }
+}
+
+public class Main{
+RateLimiter fixedwindowratelimiter=RateLimiterFactory.createRateLimiter("fixed", Configurable.maxRequest,configurable.windowSize);
+
+
+}
+
