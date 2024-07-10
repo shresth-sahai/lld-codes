@@ -1,0 +1,268 @@
+Design patterns--- > 
+Specific problems--> soln--->
+
+Creational--->Object Creation
+    - Singleton -> Make sure there one isntance
+    - Factory -> Assigns subclasses to instanting objects
+   * - Abstract Factory -> Constructs related objects families without defiing concrete classes
+    - ProtoType-> Clones object to provide a template example
+    - Builder ->Helps us in building complex objects side by side 
+
+Singleton -> Make sure there one instance--->
+Restricted instantion ---> eg printer spools, file system 
+
+Eg public class Singleton{
+
+    private static Singleton instance;
+
+    private Singleton(){
+
+    }
+
+    public static Singleton getInstance(){
+        if(instance==null) instance=new Singleton();
+        return instance;
+    }
+}
+C++ :
+
+class Singleton{
+    private:
+    static Singleton* instance;
+
+    Singleton(){}
+
+public :
+     static Singleton* getInstance(){
+        if(instance==null) instance=new Singleton();
+        return instance;
+    }
+
+};
+
+Factory Design Pattern: Assigns subclasses to instanting objects 
+System remains independent of how object is instantiated 
+
+interface Product{
+    void use();
+}
+class ProductA implements Product{
+    public void use(){
+        SOPLN("");
+    }
+}
+class ProductB implements Product{
+    public void use(){
+        SOPLN("");
+    }
+}
+
+abstract class Creator {
+public abstract Product createProduct(){
+    Product.use();
+}
+public void someOpr(){
+    Product product=new Product();
+    product.use();
+}
+}
+class ConcreteCreatorA extends Creator{
+
+    public Product createProduct(){
+        return new ConcreteCreatorA();
+    }
+}
+
+Prototyp-->
+
+public abstract class Shape implements CLoneable{
+
+    private String id;
+    protected String type;
+    
+    abstract void draw();
+    //  getters && setters
+    .....
+    
+}
+
+// Design Parking lot --> leetcode --> 
+// The parking lot system manages the parking of vehicles. 
+// It handles vehicle entry and exit, parking slot allocation, and fee calculation.
+
+main components: 
+1 parking lot 2 parking slot 3 vehicle 4 ticket  5 payment 6 dispaly board 
+
+Design patterns:
+1 singleton --> only one instance of class is present (parkinglot)
+2 factory --> creates instance of diff vehicles
+3 startegy --> fee calc strategy 
+
+1 parklot 
+public class ParkingLot{
+
+    private static ParkingLot instance;
+    public List<ParkinSlot> slots;
+    private Map<String,ticket> tickets;
+
+    private ParkingLot(){
+        slots=new ArrayList<>();
+        tickets=new HashMap<>();
+
+    }
+    public static ParkingLot getInstance(){
+        if(instance== null){
+            instance=new Parkinglot();
+        }
+        return instance;
+    }
+    public void initiazeSlots(int numSlots){
+        for(int i=1;i<=numSlots;i++){
+            slots.add(new ParkinSlot(i));
+        }
+    }
+    // add more fucntionality 
+}
+
+
+// parkimgslot
+public class parkingslot{
+    private int id;
+    private vehicle vehicle;
+
+public ParkinSlot(int id ){
+    this.id=id;
+    this.vehicle=null;
+}
+public boolean isAvailable(){
+    return vehicle==null;
+}
+public void occupy(vehicle vehicle){
+if(isAvailable()){
+    throw new Err();
+}
+this.vehicle=vehicle;
+}
+
+public void vacate(){
+    this.vehicle=null;
+}
+// get // set functions
+
+}
+
+// vehicle --> 
+
+
+
+public class vehicle{
+
+    private String licensePlate;
+    String type;
+
+    // constructor  
+    // get // set 
+
+    public class vehiclefactory{
+        public static vehicle createVehicle(String licensePlate,String type){
+            return new vehicle(licensePlate,type)
+        }
+    }
+}
+
+
+// payment ---> strategy 
+public class payment{
+public static double calacFee(Ticket  ticket){
+
+    long duration=(new Date().getTime()- ticket.getEntryTIme().getTime())/100*60*60;
+    return FeeStrategy.calculate(duration);
+}
+public class FeeStrategy{
+    public static double calculate(long duration){
+        return duration*10;
+    }
+}
+}
+// design tic tac toe ---> 
+lower  SDEs;
+
+components--> Game , Board , Player , Move  , GameState 
+
+Design  patterns--> 
+Singleton -->
+Factory  --> Player
+Observer --> (notification --> player WIN,LOSS)
+
+Game State --> 
+public enum GameState{
+    IN_PROGRESS, DRAW,WIN
+}
+
+Player --> 
+public class Player{
+    private String name;
+    privte char Sybmol;
+
+    public Player(String name,String symbol){
+        this.name=name;
+        this.symbol=symbol;
+    }
+    // getter setter 
+
+}
+
+PlayerFactory 
+public class PlayerFactory{
+    public static Player createPlayer(String name, char symbol){
+        return new Player(name,symbol);
+    }
+}
+
+public class Game{
+
+    private static Game instance;
+    private Board board;
+    private Player[] player;
+    int currentPlayerindex;
+    private GameState gameState;
+
+    private Game(){
+        player=new Player[2];
+        currentPlayerindex=0;
+        gameState=GameState.IN_PROGRESS;
+    }
+
+    public static Game getInstance(){
+        if(instance==null){
+            instance=new Game();
+        }
+        return instance;
+    }
+
+public void initiazeGame(){
+
+    // logic
+}
+
+
+}
+// Shopping Cart --> Applying Coupons 
+--> Design-->
+
+components--> Shoppingcart, cartItem, Coupon, PercentCoupon , Coupon Applicator, Coupon Validator
+, Coupon Repo etc
+
+Design patterns
+
+
+
+
+
+
+
+
+
+
+
+
