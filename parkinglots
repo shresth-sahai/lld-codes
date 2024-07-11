@@ -1,0 +1,161 @@
+Features: 
+1 multiple floors
+2 muitple entry and exits
+3 customer collect parking ticket and can pay at exit 
+4 customer payment options ->  payemnt options(CARD,CASH)
+5 multiple spaces
+6 payment fee modal --> first hr 4 rs 2 hr
+
+//Components
+admin--> 
+customer 
+attendants
+
+
+//Enums
+VehcileType-->Car,bike
+parkingspot--> large,compact
+parkingticketstatus--> active,lost,paid,unpaid
+
+abstract class Account{ 
+    private username; private String pass; //encyption / decrytion 
+    Person person;
+     string name;
+    string phone;
+}
+
+class admin extends Account{
+
+    bool addparkingfoor(Parkingfloor parkingfloor);
+    
+}
+
+class parkimgattendant extends Account{
+    Parkingfloor parkingfloor;
+    bool processVehicle(Vehicle vehicle)
+    {
+        return parkingfloor.assignvehicletospot(vehicle);
+    }
+}
+
+abstract class ParkingSlot{
+    String no;
+    boolean free;
+    Vehicle vehicle;
+    ParkingSpot type;
+    bool ischargingstationavailable;
+
+    public ParkingSlot(ParkingSpot type){
+        this.type=type;
+    }
+//getter and setters 
+}
+   public class compactsplot extends Parkingslot{
+public compactspot(){
+    super(ParkingSpotType.compact);
+} 
+
+public abstract class Vehicle{
+    VehcileType type;
+    String id;
+    Parkingticket parkigticket;
+
+    public void Assignticket(Parkingticket ticket){
+        this.ticket=ticket;
+    }
+}
+public car extends vehicle{
+    car(){
+        super(VehcileType.Car)
+    }
+}
+
+class Parkingfloor{
+    String name;
+    List<compactslot> compactslots;
+// similar for all the slots
+
+void addparkingslot(Parkinglot parkimgslot){
+case: Parkingslot.type=="compact":
+        compactslots.add(parkingspot)
+}
+
+ParkingSpot isSpotAvailable(VehicleType type)
+{
+    for(ParkingSpot spot : this.parkingSpots){
+        if(spot.vehicle==null)
+        {
+            return spot;
+        }
+    }
+    return null;
+}
+void assignvehicletospot(Vehicle vehicle)
+{
+    ParkingSpot spot = isSpotAvailable(Vehicle.VehicleType);
+    if(sport!=null){
+        spot.vehicle = vehicle;
+    }
+}
+void removevehiclefromspot(Vehicle vehicle ,parkimgslot parkimgslot)
+{
+
+}
+}
+
+public abstract class Gate{
+    String id;
+}
+
+public class Entrance extends Gate {
+    public Ticket GenerateTicket(Vehicle vehcle);
+
+}
+
+public class Exit extends Gate{  
+
+
+    public void Pay(Ticket, PaymentStrategy PaymentStrategy);
+    public int CalculateCharges(Ticket, Vehicle, ChargeCalculationStrategy calculate){
+        return calculate.CalculateCharges(ticket, vehicle);
+    }
+
+}
+
+public class Ticket{
+    String ticketId;
+    String entraceGateId;
+    Timestamp timeOfEntering;
+    TicketStatus ticketStatus;
+
+    //getters and setters
+}
+
+// Can create it Singleton
+class ParkingLot{
+
+    String name;
+    List<Entrance> entranceGates;
+    List<Exit> exitGates;
+    List<Parkingfloor> parkingfloor;
+
+    // Setters and Getters
+    
+}
+
+class Display {
+    Parkingfloor parkingfloor;
+
+    public displayFreeSpots()
+    {
+        List<CompactSpots> compactSpot = parkingfloor.getCompactSpots();
+        int count = 0;
+        for(Spot spot : compactSpot){
+            if(spot.vehicle==null) count++;
+        }
+
+        DisplayFreeCompactSpots(count);
+
+        //Similarly for other ParkinSpotType
+    }
+}
