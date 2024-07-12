@@ -1,0 +1,97 @@
+
+Vending Machine
+
+Components -> 
+1 Vending Machine
+2 Items
+3 PayementProcessor 
+4 Disperse
+5 paymentAcceptor 
+6 Display class 
+
+
+class VendingMachine{
+    private Item item;
+    Payementprocess paymentprocess;
+    Dispenser dispenser;
+    Diplay dispaly;
+    PaymentmentAcceptor  paymentacceptor;
+    CardReader cardreader;
+
+    // constructor 
+
+    public void addItem(Item item){
+        item.additem(item);
+    }
+     public void selectItem(String itemCode){
+        Item item =item.getItem(itemCode);
+        if(item==null){
+            dispaly.dispalyMessage("Invalid Item code");
+            return;
+        }
+        // out of stock 
+
+    }
+     // cancel transac->dispaly 
+     //complete transaction 
+}
+
+class Slots{
+    String slotId;
+    ItemType itemType; //enum
+    int space;
+
+    //constructor
+    //getter and setter
+}
+
+class ItemManger{
+    List<Slots> slots;
+    Map<Slots, List<Item>> items;
+    Display dispaly;
+
+    public void addItem(Slots slot, Item item){
+        items.put(slot, item);
+    }
+
+    public Item disperseItem(Slots slot){
+        Item item = null;
+        if(items.containsKey(slot){
+            Item listofItems = items.get(slot);
+
+            if(item.size() > 0)
+            {
+                item = listofItems.get(0);
+                listofItems.remove(0);
+                items.put(slot, listofItems);
+            }else{
+                Display.dispalyMessage("Item Unavailable);
+            }
+            return item;
+        }
+    }
+}
+class Item{
+    String itemcode;
+    enum Type;
+    // getter setters
+}
+
+class Paymentprocess{
+  public bool  processpayment(Item item,PayemntStrategy paymentstrategy){
+      return paymentstrategy.pay();
+  }
+}
+
+class Diplay{
+
+    public void dispalyMessage(String messgae){
+
+    }
+     public void dispalyPrice(flaot price){
+        
+    }
+   
+}
+
+
